@@ -63,4 +63,11 @@ export const status = {
     code: "ARTICLE4001",
     message: "게시글이 없습니다.",
   },
+
+  NOT_FOUND: {
+    status: StatusCodes.NOT_FOUND,
+    isSuccess: false,
+    code: "COMMON005",
+    message: "찾을 수 없습니다.",
+  },
 };
