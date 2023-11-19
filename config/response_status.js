@@ -70,4 +70,32 @@ export const status = {
     code: "COMMON005",
     message: "찾을 수 없습니다.",
   },
+
+  EMAIL_ALREADY_EXIST: {
+    status: StatusCodes.BAD_REQUEST,
+    isSuccess: false,
+    code: "MEMBER4003",
+    message: "해당 이메일은 이미 존재합니다.",
+  },
+
+  STORE_NOT_EXIST: {
+    status: StatusCodes.CONFLICT,
+    isSuccess: false,
+    code: "STORE4001",
+    message: "존재하지 않는 가게입니다.",
+  },
+
+  MISSION_ALREADY_ON: {
+    status: StatusCodes.CONFLICT,
+    isSuccess: false,
+    code: "MISSION4001",
+    message: "이미 도전중인 미션입니다.",
+  },
+
+  PARAMETER_IS_WRONG: {
+    status: StatusCodes.BAD_REQUEST,
+    isSuccess: false,
+    code: "PARAM4001",
+    message: "잘못된 파라미터 입니다.",
+  },
 };
