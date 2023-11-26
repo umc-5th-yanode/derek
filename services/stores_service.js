@@ -15,10 +15,18 @@ export const addStore = async (body) => {
     region_id: body.region_id,
   });
 
+  // 추천
+  // const temp = await getStore(addStoreData);
+  // return addStoreDTO(temp);
+  //
+
   return addStoreDTO(await getStore(addStoreData));
 };
 
 export const addReview = async (body) => {
+  // 추천
+  // const NO_STORE = -1;
+
   const addReviewData = await plusReview({
     body: body.body,
     score: body.score,

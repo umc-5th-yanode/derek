@@ -11,7 +11,7 @@ import {
   confirmStore,
   insertMissionSql,
   getMissionID,
-} from "./store_sql.js";
+} from "./stores_sql.js";
 
 export const plusStore = async (data) => {
   try {
