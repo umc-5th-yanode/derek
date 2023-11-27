@@ -15,76 +15,94 @@ import {
 // User 데이터 삽입
 export const addUser = async (data) => {
   try {
+    const {
+      name,
+      gender,
+      phoneNumber,
+      email,
+      birth,
+      address,
+      specAddress,
+      prefer,
+    } = data;
+
     const conn = await pool.getConnection();
 
-    const [confirm] = await pool.query(confirmEmail, data.email);
+    const [confirm] = await pool.query(confirmEmail, email);
 
+    const NOTEXIST = -1;
     if (confirm[0].isExistEmail) {
       conn.release();
-      return -1;
+      return NOTEXIST;
     }
 
     const result = await pool.query(insertUserSql, [
-      data.email,
-      data.name,
-      data.gender,
-      data.birth,
-      data.addr,
-      data.specAddr,
-      data.phone,
+      name,
+      gender,
+      phoneNumber,
+      email,
+      birth,
+      address,
+      specAddress,
+      prefer,
     ]);
 
     conn.release();
     return result[0].insertId;
   } catch (err) {
+    console.log(err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
 
 // 사용자 정보 얻기
-export const getUser = async (userId) => {
+export const getUser = async (member_id) => {
   try {
     const conn = await pool.getConnection();
-    const [user] = await pool.query(getUserID, userId);
+    const [member] = await pool.query(getUserID, member_id);
 
-    console.log(user);
+    console.log(member);
 
-    if (user.length == 0) {
+    if (member.length == 0) {
       return -1;
     }
 
     conn.release();
-    return user;
+    return member;
   } catch (err) {
+    console.log("getUser오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
 
 // 음식 선호 카테고리 매핑
-export const setPrefer = async (userId, foodCategoryId) => {
+export const setPrefer = async (member_id, foodCategoryId) => {
   try {
     const conn = await pool.getConnection();
 
-    await pool.query(connectFoodCategory, [foodCategoryId, userId]);
+    await pool.query(connectFoodCategory, [foodCategoryId, member_id]);
 
     conn.release();
 
     return;
   } catch (err) {
+    console.log("setPrefer 오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
 
 // 사용자 선호 카테고리 반환
-export const getUserPreferToUserID = async (userID) => {
+export const getUserPreferToUserID = async (member_id) => {
   try {
     const conn = await pool.getConnection();
-    const prefer = await pool.query(getPreferToUserID, userID);
+    const prefer = await pool.query(getPreferToUserID, member_id);
 
+    console.log("member_prefer join 결과 ", prefer);
     conn.release();
 
     return prefer;
   } catch (err) {
+    console.log("getUserPrefer 오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };

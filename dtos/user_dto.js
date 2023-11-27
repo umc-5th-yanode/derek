@@ -1,14 +1,13 @@
 // dtos/user_dto.js
 
-// sign in response DTO
-export const signinResponseDTO = (user, prefer) => {
+export const signinDTO = (memeber, prefer) => {
   const preferFood = [];
   for (let i = 0; i < prefer[0].length; i++) {
-    preferFood.push(prefer[0][i].f_category_name);
+    preferFood.push(prefer[0][i].food_category_name);
   }
   return {
-    email: user[0].email,
-    name: user[0].user_name,
+    email: memeber[0].email,
+    name: memeber[0].name,
     preferCategory: preferFood,
   };
 };

@@ -1,7 +1,7 @@
 import { response } from "../config/response.js";
 import { status } from "../config/response_status.js";
 
-import { addStore, addReview, addMission } from "../services/store_service.js";
+import { addStore, addReview, addMission } from "../services/stores_service.js";
 
 export const storeAdd = async (req, res, next) => {
   console.log("가게 추가를 요청합니다");

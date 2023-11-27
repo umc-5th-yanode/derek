@@ -4,7 +4,7 @@ import { BaseError } from "./config/error.js";
 import { status } from "./config/response_status.js";
 import { tempRouter } from "./routes/temp_route.js";
 import { userRouter } from "./routes/user_route.js";
-import { storeRouter } from "./routes/store_route.js";
+import { storesRouter } from "./routes/stores_route.js";
 import { specs } from "./config/swagger_config.js";
 import SwaggerUi from "swagger-ui-express";
 import dotenv from "dotenv";
@@ -27,7 +27,7 @@ app.use("/api-docs", SwaggerUi.serve, SwaggerUi.setup(specs));
 // router setting
 app.use("/temp", tempRouter);
 app.use("/user", userRouter);
-app.use("/stores", storeRouter);
+app.use("/stores", storesRouter);
 
 app.use((req, res, next) => {
   const err = new BaseError(status.NOT_FOUND);
