@@ -1,18 +1,18 @@
 // models/user_sql.js
 
 export const insertUserSql =
-  "INSERT INTO member (email, name, gender, phone_number, birth, address, spec_address) VALUES (?, ?, ?, ?, ?, ?, ?);";
+  "INSERT INTO member (name, gender, phone_number, email, birth, address, spec_address) VALUES (?, ?, ?, ?, ?, ?, ?);";
 
-export const getUserID = "SELECT * FROM user WHERE member_id = ?";
+export const getUserID = "SELECT * FROM member WHERE id = ?";
 
 export const connectFoodCategory =
-  "INSERT INTO food_category (id, member_id) VALUES (?, ?);";
+  "INSERT INTO member_prefer (category_id, member_id) VALUES (?, ?);";
 
 export const confirmEmail =
   "SELECT EXISTS(SELECT 1 FROM member WHERE email = ?) as isExistEmail";
 
 export const getPreferToUserID =
-  "SELECT member_prefer.id, member_prefer.member_id, member_prefer.category_id, member_prefer.name, food_category.id, food_category.name" +
+  "SELECT member_prefer.id, member_prefer.member_id, member_prefer.category_id, food_category.name " +
   "FROM member_prefer JOIN food_category on member_prefer.category_id = food_category.id " +
   "WHERE member_prefer.member_id = ? ORDER BY food_category.name ASC;";
 

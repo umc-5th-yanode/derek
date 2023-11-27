@@ -1,6 +1,6 @@
 import { BaseError } from "../config/error.js";
 import { status } from "../config/response_status.js";
-import { signinResponseDTO } from "../dtos/user_dto.js";
+import { signinDTO } from "../dtos/user_dto.js";
 import {
   addUser,
   getUser,

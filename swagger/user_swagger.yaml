@@ -1,27 +1,58 @@
 paths:
-  /user/missions:
+  /user/signin:
     post:
       tags:
         - User
-      summary: 미션 도전
+      summary: 회원가입
       parameters:
-        - name: userMissionAdd
+        - name: signIn
           in: body
           required: true
           schema:
             properties:
-              member_id:
-                type: bigint
-                description: 유저 id
+              name:
+                type: string
+                description: 유저 이름
+                example: swagger
+              gender:
+                type: integer
+                description: 유저 성별
                 example: 1
-              mission_id:
-                type: bigint
-                description: 미션 id
+              birthYear:
+                type: integer
+                description: 생일 년도
+                example: 2000
+              birthMonth:
+                type: integer
+                description: 생일 월
                 example: 1
-
+              birthDay:
+                type: integer
+                description: 생일 일
+                example: 31
+              address:
+                type: string
+                description: 주소
+                example: swagger Test address
+              specAddress:
+                type: string
+                description: 상세 주소
+                example: swagger Test specAddr
+              phoneNumber:
+                type: string
+                description: 전화 번호
+                example: 010-0000-0000
+              email:
+                type: string
+                description: 유저 이메일
+                example: swaggerTest@mail.com
+              prefer:
+                type: array
+                description: 선호 카테고리 번호
+                example: [1, 3, 5]
       responses:
         "200":
-          description: 미션 도전에 추가 성공!
+          description: 회원 가입 성공!
           schema:
             type: object
             properties:
@@ -39,7 +70,12 @@ paths:
                 example: "success!"
               data:
                 type: object
-                example: { "member_id": 1, "mission_id": 1 }
+                example:
+                  {
+                    "email": "swaggerTest@mail.com",
+                    "name": "swagger",
+                    "preferCategory": ["한식", "일식"],
+                  }
 
         "400":
           description: 잘못된 요청

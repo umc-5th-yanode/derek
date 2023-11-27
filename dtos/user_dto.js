@@ -7,7 +7,7 @@ export const signinDTO = (memeber, prefer) => {
   }
   return {
     email: memeber[0].email,
-    name: memeber[0].memeber_name,
+    name: memeber[0].name,
     preferCategory: preferFood,
   };
 };

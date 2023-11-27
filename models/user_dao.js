@@ -20,17 +20,15 @@ export const addUser = async (data) => {
       gender,
       phoneNumber,
       email,
-      birthYear,
-      birthMonth,
-      birthDay,
+      birth,
       address,
       specAddress,
-      selectedCategory,
-    } = body;
+      prefer,
+    } = data;
 
     const conn = await pool.getConnection();
 
-    const [confirm] = await pool.query(confirmEmail, data.email);
+    const [confirm] = await pool.query(confirmEmail, email);
 
     const NOTEXIST = -1;
     if (confirm[0].isExistEmail) {
@@ -43,17 +41,16 @@ export const addUser = async (data) => {
       gender,
       phoneNumber,
       email,
-      birthYear,
-      birthMonth,
-      birthDay,
+      birth,
       address,
       specAddress,
-      selectedCategory,
+      prefer,
     ]);
 
     conn.release();
     return result[0].insertId;
   } catch (err) {
+    console.log(err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
@@ -73,6 +70,7 @@ export const getUser = async (member_id) => {
     conn.release();
     return member;
   } catch (err) {
+    console.log("getUser오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
@@ -88,6 +86,7 @@ export const setPrefer = async (member_id, foodCategoryId) => {
 
     return;
   } catch (err) {
+    console.log("setPrefer 오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };
@@ -98,10 +97,12 @@ export const getUserPreferToUserID = async (member_id) => {
     const conn = await pool.getConnection();
     const prefer = await pool.query(getPreferToUserID, member_id);
 
+    console.log("member_prefer join 결과 ", prefer);
     conn.release();
 
     return prefer;
   } catch (err) {
+    console.log("getUserPrefer 오류", err);
     throw new BaseError(status.PARAMETER_IS_WRONG);
   }
 };

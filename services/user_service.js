@@ -19,12 +19,10 @@ export const joinUser = async (body) => {
     birthDay,
     address,
     specAddress,
-    selectedCategory,
+    prefer,
   } = body;
 
   const birth = new Date(birthYear, birthMonth, birthDay);
-
-  const prefer = selectedCategory;
 
   const joinUserData = await addUser({
     email: email,
@@ -42,9 +40,10 @@ export const joinUser = async (body) => {
     throw new BaseError(status.EMAIL_ALREADY_EXIST);
   } else {
     for (let i = 0; i < prefer.length; i++) {
+      console.log(prefer[i]);
       await setPrefer(joinUserData, prefer[i]);
     }
-    return signinResponseDTO(
+    return signinDTO(
       await getUser(joinUserData),
       await getUserPreferToUserID(joinUserData)
     );
